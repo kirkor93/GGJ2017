@@ -19,11 +19,8 @@ public class Spider : MonoBehaviour
     [Header("Nets")]
     [SerializeField]
     private Net _netPrefab;
-    private List<Net> _spawnedNets = new List<Net>();
 
-    [Header("Other")]
-    [SerializeField]
-    private Transform[] _players;
+    private List<Net> _spawnedNets = new List<Net>();
     
 
     private bool _initialized;
@@ -48,7 +45,7 @@ public class Spider : MonoBehaviour
         _moveIterations = 0;
     }
 
-    public void Move()
+    public void Move(Transform[] players)
     {
         if (_currentWaypoint == null ||
             (_currentWaypoint.transform.position - transform.position).sqrMagnitude > TileSize)
@@ -59,7 +56,7 @@ public class Spider : MonoBehaviour
 
         TrySpawnNet();
 
-        _currentWaypoint = WaypointsManager.Instance.FindPath(_currentMovement, _currentWaypoint, _players, (float)TileSize / 2.0f);
+        _currentWaypoint = WaypointsManager.Instance.FindPath(_currentMovement, _currentWaypoint, players, (float)TileSize / 2.0f);
         transform.position = _currentWaypoint.transform.position;
 
         if ((++_moveIterations % EchosToImproveMovement) == 0)
@@ -92,11 +89,15 @@ public class Spider : MonoBehaviour
         Initialize();
     }
 
-    private void Update()
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        Bat bat = other.GetComponent<Bat>();
+        if (bat == null)
         {
-            Move();
+            Debug.Log(string.Format("Spider triggered with {0}. Nothing to do here", other.gameObject.name));
+            return;
         }
+
+        GameManager.Instance.StopGame(false);
     }
 }
