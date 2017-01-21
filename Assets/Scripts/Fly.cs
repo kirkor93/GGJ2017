@@ -17,6 +17,10 @@ public class Fly : MonoBehaviour
     [SerializeField]
     private FlyType _flyType;
 
+    [Range(0.0f, 500.0f)]
+    [SerializeField]
+    private float _echoEnergyBoost = 100.0f;
+
     [Range(0.0f, 100.0f)]
     [SerializeField]
     private float _boostValue;
@@ -27,6 +31,11 @@ public class Fly : MonoBehaviour
     private bool _initialized = false;
     private Collider2D _collider;
     private SpriteRenderer _renderer;
+
+    private const float SpeedMin = 0.5f;
+    private const float SpeedMax = 2.0f;
+    private const float SightMin = 0.5f;
+    private const float SightMax = 2.0f;
 
     public void Initialize()
     {
@@ -79,7 +88,7 @@ public class Fly : MonoBehaviour
                     {
                         if (movedFromRandom)
                         {
-
+                            value *= Random.Range(SpeedMin, SpeedMax);
                         }
 
                         StartCoroutine(SpeedCoroutine(bat, value));
@@ -95,7 +104,7 @@ public class Fly : MonoBehaviour
                     {
                         if (movedFromRandom)
                         {
-
+                            value *= Random.Range(SightMin, SightMax);
                         }
 
                         StartCoroutine(SightCoroutine(bat, value));
@@ -127,9 +136,10 @@ public class Fly : MonoBehaviour
 
     private IEnumerator SightCoroutine(Bat bat, float value)
     {
-//        bat.speed += value;
+        Light l = bat.GetComponentInChildren<Light>();
+        l.range += value;
         yield return new WaitForSeconds(_duration);
-        //        bat.speed -= value;
+        l.range -= value;
 
         Destroy(gameObject);
     }

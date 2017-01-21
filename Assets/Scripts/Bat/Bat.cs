@@ -11,6 +11,14 @@ public class Bat : MonoBehaviour {
 	public KeyCode down;
 	public KeyCode left;
 	public KeyCode right;
+    public KeyCode Echolocate;
+
+    public GameObject EcholocatorPrefab;
+    public float EcholocatorFuel;
+    public float EcholocatorFuelRequired;
+    public float EcholocatorTimeout;
+
+    private float _echolocatorTimer;
 
 	// Use this for initialization
 	void Start () {
@@ -42,5 +50,27 @@ public class Bat : MonoBehaviour {
 			changePos = new Vector3 (-Time.deltaTime * speed, 0, 0);
 			transform.position += changePos;
 		}
+
+	    if (Input.GetKeyDown(Echolocate))
+	    {
+            TryEcholocate();
+	    }
+
+	    if (_echolocatorTimer > 0.0)
+	    {
+	        _echolocatorTimer -= Time.deltaTime;
+	    }
 	}
+
+    private void TryEcholocate()
+    {
+        if (EcholocatorFuel >= EcholocatorFuelRequired && _echolocatorTimer <= 0)
+        {
+            GameObject echo = Instantiate(EcholocatorPrefab,
+                new Vector3(transform.position.x, transform.position.y, 0.0f), EcholocatorPrefab.transform.rotation);
+
+            EcholocatorFuel -= EcholocatorFuelRequired;
+            _echolocatorTimer = EcholocatorTimeout;
+        }
+    }
 }
