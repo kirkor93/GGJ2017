@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[RequireComponent(typeof(Collider2D), typeof(SpriteRenderer))]
 public class Fly : MonoBehaviour
 {
     public enum FlyType
@@ -30,7 +29,7 @@ public class Fly : MonoBehaviour
 
     private bool _initialized = false;
     private Collider2D _collider;
-    private SpriteRenderer _renderer;
+    private Renderer _renderer;
 
     private const float SpeedMin = 0.5f;
     private const float SpeedMax = 2.0f;
@@ -45,7 +44,7 @@ public class Fly : MonoBehaviour
         }
 
         _collider = GetComponent<Collider2D>();
-        _renderer = GetComponent<SpriteRenderer>();
+        _renderer = GetComponent<Renderer>();
 
         _initialized = true;
     }
