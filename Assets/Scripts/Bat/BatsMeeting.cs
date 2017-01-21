@@ -16,7 +16,7 @@ public class BatsMeeting : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D other){
 		if (other.gameObject.tag == "Bat") {
-			print ("randevous");
+			GameManager.Instance.StopGame(true);
 		}
 	}
 }
