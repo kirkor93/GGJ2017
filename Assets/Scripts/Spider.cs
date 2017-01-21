@@ -13,7 +13,7 @@ public class Spider : MonoBehaviour
     public int MovementImproveValue;
     [Range(1, 100)]
     public int TileSize;
-    [SerializeField]
+    
     private Waypoint _currentWaypoint;
 
     [Header("Nets")]
@@ -33,6 +33,9 @@ public class Spider : MonoBehaviour
         {
             return;
         }
+        
+        _currentWaypoint = WaypointsManager.Instance.GetClosestWaypoint(transform.position);
+        transform.position = (Vector2)_currentWaypoint.transform.position;
 
         Reset();
 

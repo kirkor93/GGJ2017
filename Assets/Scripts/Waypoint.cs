@@ -44,7 +44,8 @@ public class Waypoint : MonoBehaviour
         {
             for (int j = 0; j < directions.Length; j++)
             {
-                if (Vector2.Angle(neighbours[i].transform.position - transform.position, directions[j]) < 45.0f)
+                if (Vector2.Angle(neighbours[i].transform.position - transform.position, directions[j]) < 45.0f
+                    && !Physics2D.Raycast(transform.position, directions[j], SearchCircleRadiusMax, 1 << LayerMask.NameToLayer("Wall")))
                 {
                     _neighbours[j] = neighbours[i];
                 }

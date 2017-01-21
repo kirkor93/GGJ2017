@@ -14,6 +14,7 @@ public class GameManager : Singleton<GameManager>
 
     private bool _initialized;
     private bool _gameRunning;
+    private Transform[] _playersTransforms;
 
     public bool IsGameRunning
     {
@@ -32,7 +33,11 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
-
+        _playersTransforms = new Transform[_players.Length];
+        for (int i = 0; i < _players.Length; i++)
+        {
+            _playersTransforms[i] = _players[i].GetComponent<Transform>();
+        }
 
         _initialized = true;
     }
@@ -64,6 +69,11 @@ public class GameManager : Singleton<GameManager>
         _gameRunning = false;
     }
 
+    private void Awake()
+    {
+        StartGame();
+    }
+
     private void Update()
     {
         if (!_gameRunning)
@@ -72,5 +82,13 @@ public class GameManager : Singleton<GameManager>
         }
 
         _timer += Time.deltaTime;
+
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            for (int i = 0; i < _spiders.Length; i++)
+            {
+                _spiders[i].Move(_playersTransforms);
+            }
+        }
     }
 }
