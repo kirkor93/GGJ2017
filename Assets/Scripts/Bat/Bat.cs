@@ -71,6 +71,9 @@ public class Bat : MonoBehaviour {
 
             EcholocatorFuel -= EcholocatorFuelRequired;
             _echolocatorTimer = EcholocatorTimeout;
+
+            GameManager.Instance.MoveSpider();
+            GameManager.Instance.ProcessFlies();
         }
     }
 }

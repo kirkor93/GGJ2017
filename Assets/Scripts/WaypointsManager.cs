@@ -24,6 +24,11 @@ public class WaypointsManager : Singleton<WaypointsManager>
         _initialized = true;
     }
 
+    public Waypoint[] AvailableWaypoints
+    {
+        get { return _availableWaypoints; }
+    }
+
     private void Awake()
     {
         Initialize();

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(WaypointsManager))]
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField]
@@ -10,11 +11,21 @@ public class GameManager : Singleton<GameManager>
     [SerializeField]
     private Spider[] _spiders;
 
+    [SerializeField]
+    private Fly[] _fliesPrefabs;
+
+    [SerializeField]
+    [Range(0, 10)]
+    private int _fliesSpawnedPerEcho;
+
     private float _timer;
 
     private bool _initialized;
     private bool _gameRunning;
     private Transform[] _playersTransforms;
+    private WaypointsManager _waypointsManager;
+
+    private List<Fly> _spawnedFlies = new List<Fly>();
 
     public bool IsGameRunning
     {
@@ -33,6 +44,7 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+        _waypointsManager = GetComponent<WaypointsManager>();
         _playersTransforms = new Transform[_players.Length];
         for (int i = 0; i < _players.Length; i++)
         {
@@ -82,12 +94,38 @@ public class GameManager : Singleton<GameManager>
         }
 
         _timer += Time.deltaTime;
+    }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+    public void MoveSpider()
+    {
+        for (int i = 0; i < _spiders.Length; i++)
         {
-            for (int i = 0; i < _spiders.Length; i++)
+            _spiders[i].Move(_playersTransforms);
+        }
+    }
+
+    public void ProcessFlies()
+    {
+        foreach (Fly fly in _spawnedFlies)
+        {
+            if (fly != null)
             {
-                _spiders[i].Move(_playersTransforms);
+                Destroy(fly.gameObject);
+            }
+        }
+        _spawnedFlies.Clear();
+
+        HashSet<Waypoint> usedWaypoints = new HashSet<Waypoint>();
+        for (int i = 0; i < _fliesSpawnedPerEcho; i++)
+        {
+            Waypoint[] possibleWaypoints = _waypointsManager.AvailableWaypoints;
+            Waypoint selected = possibleWaypoints[Random.Range(0, possibleWaypoints.Length)];
+            if (!usedWaypoints.Contains(selected))
+            {
+                usedWaypoints.Add(selected);
+                GameObject fly = Instantiate(_fliesPrefabs[Random.Range(0, _fliesPrefabs.Length)].gameObject,
+                    selected.transform.position, Quaternion.identity);
+                _spawnedFlies.Add(fly.GetComponent<Fly>());
             }
         }
     }
