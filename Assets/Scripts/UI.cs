@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class UI : MonoBehaviour {
 
 	public Text timer;
-
+    public Image[] PlayerBars;
 
 
 	// Use this for initialization
@@ -15,16 +15,13 @@ public class UI : MonoBehaviour {
 	}
 	
 	// Update is called once per frame
-	void Update () {
-		timeToString ();
-	}
-
-	void timeToString(){
-		float timerFloat;
-		string timerString;
-
-		timerFloat = Mathf.Ceil( GameManager.Instance.GameTimer);
-		timerString = timerFloat.ToString ();
-		timer.text = timerString;
+	void Update ()
+	{
+	    timer.text = Mathf.Ceil(GameManager.Instance.GameTimer).ToString();
+	    for (int i = 0; i < PlayerBars.Length; i++)
+	    {
+	        Bat bat = GameManager.Instance.Players[i];
+	        PlayerBars[i].fillAmount = Mathf.Clamp01(bat.EcholocatorFuel / bat.EcholocatorFuelRequired);
+	    }
 	}
 }
