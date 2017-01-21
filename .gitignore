@@ -2,3 +2,7 @@ Library/
 Temp/
 *.csproj
 *.sln
+*.suo
+Assets/Marcek - smietnik/
+obj/
+*.userprefs
