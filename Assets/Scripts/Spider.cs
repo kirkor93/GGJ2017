@@ -19,6 +19,7 @@ public class Spider : MonoBehaviour
     [Header("Nets")]
     [SerializeField]
     private Net _netPrefab;
+    private List<Net> _spawnedNets = new List<Net>();
 
     [Header("Other")]
     [SerializeField]
@@ -56,12 +57,33 @@ public class Spider : MonoBehaviour
             return;
         }
 
+        TrySpawnNet();
+
         _currentWaypoint = WaypointsManager.Instance.FindPath(_currentMovement, _currentWaypoint, _players, (float)TileSize / 2.0f);
         transform.position = _currentWaypoint.transform.position;
 
         if ((++_moveIterations % EchosToImproveMovement) == 0)
         {
             _currentMovement += MovementImproveValue;
+        }
+    }
+
+    private void TrySpawnNet()
+    {
+        bool alreadySpawnedNet = false;
+        foreach (Net net in _spawnedNets)
+        {
+            if (net != null && 
+                ((Vector2)transform.position - (Vector2)net.transform.position).sqrMagnitude < TileSize * TileSize)
+            {
+                alreadySpawnedNet = true;
+                break;
+            }
+        }
+        if (!alreadySpawnedNet)
+        {
+            GameObject net = Instantiate(_netPrefab.gameObject, transform.position, transform.rotation);
+            _spawnedNets.Add(net.GetComponent<Net>());
         }
     }
 
