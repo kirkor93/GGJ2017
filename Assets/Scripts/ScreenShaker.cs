@@ -39,7 +39,7 @@ public class ScreenShaker : Singleton<ScreenShaker>
 
         while (_dPos.sqrMagnitude > 0.001f)
         {
-            Vector2 delta = -_dPos * Time.deltaTime;
+            Vector2 delta = -_dPos /** Time.deltaTime*/;
             _dPos += delta;
             for (int i = 0; i < _affectedCameras.Length; i++)
             {
