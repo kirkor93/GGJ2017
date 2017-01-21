@@ -124,7 +124,7 @@ public class GameManager : Singleton<GameManager>
             {
                 usedWaypoints.Add(selected);
                 GameObject fly = Instantiate(_fliesPrefabs[Random.Range(0, _fliesPrefabs.Length)].gameObject,
-                    selected.transform.position, Quaternion.identity);
+                    new Vector3(selected.transform.position.x, selected.transform.position.y, -1.0f), Quaternion.identity);
                 _spawnedFlies.Add(fly.GetComponent<Fly>());
             }
         }
