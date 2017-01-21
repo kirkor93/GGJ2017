@@ -6,13 +6,22 @@ public class WaypointsManager : Singleton<WaypointsManager>
 {
     private Waypoint[] _availableWaypoints;
 
+    private bool _initialized;
+
     public void Initialize()
     {
+        if (_initialized)
+        {
+            return;
+        }
+
         _availableWaypoints = GetComponentsInChildren<Waypoint>(true);
         foreach (Waypoint waypoint in _availableWaypoints)
         {
             waypoint.Initialize();
         }
+
+        _initialized = true;
     }
 
     private void Awake()
@@ -65,5 +74,27 @@ public class WaypointsManager : Singleton<WaypointsManager>
         }
 
         return current;
+    }
+
+    public Waypoint GetClosestWaypoint(Vector2 position)
+    {
+        if (!_initialized)
+        {
+            Initialize();
+        }
+
+        Waypoint closest = _availableWaypoints[0];
+        float closestDistance = ((Vector2) position - (Vector2) closest.transform.position).sqrMagnitude;
+        for (int i = 1; i < _availableWaypoints.Length; i++)
+        {
+            float distance = ((Vector2) position - (Vector2) _availableWaypoints[i].transform.position).sqrMagnitude;
+            if (distance < closestDistance)
+            {
+                closestDistance = distance;
+                closest = _availableWaypoints[i];
+            }
+        }
+
+        return closest;
     }
 }
