@@ -13,47 +13,68 @@ public class Spider : MonoBehaviour
     public int MovementImproveValue;
     [Range(1, 100)]
     public int TileSize;
-
-
-    [SerializeField]
-    private Transform[] _players;
     [SerializeField]
     private Waypoint _currentWaypoint;
 
-    private bool _initialized;
+    [Header("Nets")]
+    [SerializeField]
+    private Net _netPrefab;
 
-    private void Initialize()
+    [Header("Other")]
+    [SerializeField]
+    private Transform[] _players;
+    
+
+    private bool _initialized;
+    private int _currentMovement;
+    private int _moveIterations;
+
+    public void Initialize()
     {
         if (_initialized)
         {
             return;
         }
 
+        Reset();
+
         _initialized = true;
+    }
+
+    public void Reset()
+    {
+        _currentMovement = InitialMovementPerEcho;
+        _moveIterations = 0;
     }
 
     public void Move()
     {
-        Vector2 myPosition = transform.position;
-        Transform chosenOne = _players[0];
-        for (int i = 1; i < _players.Length; i++)
+        if (_currentWaypoint == null ||
+            (_currentWaypoint.transform.position - transform.position).sqrMagnitude > TileSize)
         {
-            if((myPosition - (Vector2)_players[i].position).sqrMagnitude < (myPosition - (Vector2)chosenOne.position).sqrMagnitude)
-            {
-                chosenOne = _players[i];
-            }
+            Debug.LogError("current waypoint is baaaaaaad :<");
+            return;
         }
 
-        
+        _currentWaypoint = WaypointsManager.Instance.FindPath(_currentMovement, _currentWaypoint, _players, (float)TileSize / 2.0f);
+        transform.position = _currentWaypoint.transform.position;
 
+        if ((++_moveIterations % EchosToImproveMovement) == 0)
+        {
+            _currentMovement += MovementImproveValue;
+        }
+    }
+
+    private void Awake()
+    {
+        Initialize();
     }
 
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.A))
         {
-            _currentWaypoint = WaypointsManager.Instance.FindPath(InitialMovementPerEcho, _currentWaypoint, _players, (float)TileSize / 2.0f);
-            transform.position = _currentWaypoint.transform.position;
+            Move();
         }
     }
 }

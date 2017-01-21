@@ -52,9 +52,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af9e08e9c81fbb4182d2f4522b5d9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  InitialMovementPerEcho: 2
-  EchosToImproveMovement: 5
-  MovementImproveValue: 2
+  InitialMovementPerEcho: 1
+  EchosToImproveMovement: 3
+  MovementImproveValue: 1
   TileSize: 1
   _players:
   - {fileID: 0}
