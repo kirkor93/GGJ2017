@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0, g: 0, b: 0, a: 1}
+  m_AmbientSkyColor: {r: 1, g: 1, b: 1, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -91,6 +91,48 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &231132965
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 35.719357
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1.9003929
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4943189081650404, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 79814858fa1acd74aba1751c3eba8285, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &378098195
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +208,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &495014513
 Transform:
   m_ObjectHideFlags: 0
@@ -297,7 +339,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 502186963}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 21.79, y: 3.97, z: -4.26}
+  m_LocalPosition: {x: 40.22, y: 3.97, z: -4.26}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -443,6 +485,10 @@ Prefab:
       propertyPath: m_Intensity
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 1952772313839568, guid: 8a52a5688fbb6c34db1dbe4447edcbb8, type: 2}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8a52a5688fbb6c34db1dbe4447edcbb8, type: 2}
   m_IsPrefabParent: 0
@@ -525,6 +571,90 @@ Transform:
   m_PrefabParentObject: {fileID: 4893038739252600, guid: 8a52a5688fbb6c34db1dbe4447edcbb8,
     type: 2}
   m_PrefabInternal: {fileID: 1379686018}
+--- !u!1 &1600635113
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1600635117}
+  - component: {fileID: 1600635116}
+  - component: {fileID: 1600635115}
+  - component: {fileID: 1600635114}
+  m_Layer: 0
+  m_Name: SpiderMesh
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1600635114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1600635113}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2b239a34dbf70494ebd1abd4d9aef8f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  columns: 8
+  rows: 5
+  currentFrame: 1
+  animTime: 0
+--- !u!23 &1600635115
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1600635113}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_Materials:
+  - {fileID: 2100000, guid: ca1397cc25c1e164d879f0ace6de8bf5, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 1
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+--- !u!33 &1600635116
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1600635113}
+  m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!4 &1600635117
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1600635113}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 26.13, y: 1.7226446, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1944599600
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,7 +695,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 822dbfe9b22042a459dba63aa0b2f3bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  time: 0.1
+  time: 1
 --- !u!1 &2076672068
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +784,11 @@ MonoBehaviour:
   down: 115
   left: 97
   right: 100
+  Echolocate: 0
+  EcholocatorPrefab: {fileID: 0}
+  EcholocatorFuel: 0
+  EcholocatorFuelRequired: 0
+  EcholocatorTimeout: 0
 --- !u!23 &2076672073
 MeshRenderer:
   m_ObjectHideFlags: 0
