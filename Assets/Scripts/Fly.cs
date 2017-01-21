@@ -122,6 +122,7 @@ public class Fly : MonoBehaviour
 
         _collider.enabled = false;
         _renderer.enabled = false;
+        bat.EcholocatorFuel += _echoEnergyBoost;
     }
 
     private IEnumerator SpeedCoroutine(Bat bat, float value)

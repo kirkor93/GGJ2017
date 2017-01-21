@@ -13,6 +13,8 @@ public class Spider : MonoBehaviour
     public int MovementImproveValue;
     [Range(1, 100)]
     public int TileSize;
+    [Range(0.0f, 10.0f)]
+    public float MovementSpeed = 2.0f;
     
     private Waypoint _currentWaypoint;
 
@@ -36,6 +38,7 @@ public class Spider : MonoBehaviour
         
         _currentWaypoint = WaypointsManager.Instance.GetClosestWaypoint(transform.position);
         transform.position = (Vector2)_currentWaypoint.transform.position;
+//        transform.position.z = -1.0f;
 
         Reset();
 
@@ -50,17 +53,17 @@ public class Spider : MonoBehaviour
 
     public void Move(Transform[] players)
     {
-        if (_currentWaypoint == null ||
-            (_currentWaypoint.transform.position - transform.position).sqrMagnitude > TileSize)
-        {
-            Debug.LogError("current waypoint is baaaaaaad :<");
-            return;
-        }
+//        if (_currentWaypoint == null ||
+//            (_currentWaypoint.transform.position - transform.position).sqrMagnitude > TileSize)
+//        {
+//            Debug.LogError("current waypoint is baaaaaaad :<");
+//            return;
+//        }
 
         TrySpawnNet();
 
         _currentWaypoint = WaypointsManager.Instance.FindPath(_currentMovement, _currentWaypoint, players, (float)TileSize / 2.0f);
-        transform.position = _currentWaypoint.transform.position;
+//        transform.position = _currentWaypoint.transform.position;
 
         if ((++_moveIterations % EchosToImproveMovement) == 0)
         {
@@ -102,5 +105,23 @@ public class Spider : MonoBehaviour
         }
 
         GameManager.Instance.StopGame(false);
+    }
+
+    private void Update()
+    {
+        Vector2 direction = ((Vector2) _currentWaypoint.transform.position - (Vector2) transform.position);
+        Vector2 normalizedDirection = direction.normalized;
+        normalizedDirection *= Time.deltaTime * MovementSpeed;
+        transform.position = new Vector3(transform.position.x + normalizedDirection.x, transform.position.y + normalizedDirection.y, transform.position.z);
+
+        Vector3 vectorToTarget = _currentWaypoint.transform.position - transform.position;
+        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+        Quaternion q = Quaternion.Euler(0, 0, angle - 90);
+        transform.rotation = Quaternion.Lerp(transform.rotation, q, 0.1f);
+
+        if (direction.sqrMagnitude < (TileSize * TileSize) / 2.0f)
+        {
+            Move(GameManager.Instance.PlayersTransforms);
+        }
     }
 }

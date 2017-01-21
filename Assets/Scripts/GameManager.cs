@@ -37,6 +37,11 @@ public class GameManager : Singleton<GameManager>
         get { return _timer; }
     }
 
+    public Transform[] PlayersTransforms
+    {
+        get { return _playersTransforms; }
+    }
+
     public void Initialize()
     {
         if (_initialized)
@@ -96,13 +101,13 @@ public class GameManager : Singleton<GameManager>
         _timer += Time.deltaTime;
     }
 
-    public void MoveSpider()
-    {
-        for (int i = 0; i < _spiders.Length; i++)
-        {
-            _spiders[i].Move(_playersTransforms);
-        }
-    }
+//    public void MoveSpider()
+//    {
+//        for (int i = 0; i < _spiders.Length; i++)
+//        {
+//            _spiders[i].Move(_playersTransforms);
+//        }
+//    }
 
     public void ProcessFlies()
     {

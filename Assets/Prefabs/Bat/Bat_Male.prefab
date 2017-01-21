@@ -257,9 +257,9 @@ MonoBehaviour:
   Echolocate: 306
   EcholocatorPrefab: {fileID: 1548664737463610, guid: 3e636dee3d5f2704ab823350ba099488,
     type: 2}
-  EcholocatorFuel: 500
+  EcholocatorFuel: 100
   EcholocatorFuelRequired: 100
-  EcholocatorTimeout: 10
+  EcholocatorTimeout: 5
 --- !u!114 &114334556737130432
 MonoBehaviour:
   m_ObjectHideFlags: 1

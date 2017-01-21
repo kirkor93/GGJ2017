@@ -32,24 +32,36 @@ public class Bat : MonoBehaviour {
 
 	void BatsControll(){
 
-		Vector3 changePos;
+		Vector3 changePos = new Vector3(0, 0, 0);
 
 		//Female controll
-		if (Input.GetKey (up)) {
-			changePos = new Vector3 (0, Time.deltaTime*speed,0);
-			transform.position +=changePos;
-		} else if (Input.GetKey (down)) {
-			changePos = new Vector3 (0, -Time.deltaTime*speed,0);
-			transform.position +=changePos;
-		}
+		if (Input.GetKey (up))
+		{
+		    changePos.y += Time.deltaTime * speed;
 
-		if (Input.GetKey (right)) {
-			changePos = new Vector3 (Time.deltaTime * speed, 0, 0);
-			transform.position += changePos;
-		} else if (Input.GetKey (left)) {
-			changePos = new Vector3 (-Time.deltaTime * speed, 0, 0);
-			transform.position += changePos;
-		}
+		} else if (Input.GetKey (down))
+        {
+            changePos.y -= Time.deltaTime * speed;
+        }
+
+		if (Input.GetKey (right))
+        {
+            changePos.x += Time.deltaTime * speed;
+        } else if (Input.GetKey (left))
+        {
+            changePos.x -= Time.deltaTime * speed;
+        }
+
+	    Vector3 oldPos = transform.position;
+        transform.position += changePos;
+
+	    if (changePos.sqrMagnitude > float.Epsilon)
+	    {
+	        Vector3 vectorToTarget = transform.position - oldPos;
+	        float angle = Mathf.Atan2(vectorToTarget.y, vectorToTarget.x) * Mathf.Rad2Deg;
+	        Quaternion q = Quaternion.Euler(0, 0, angle - 90);
+	        transform.rotation = Quaternion.Lerp(transform.rotation, q, 0.1f);
+	    }
 
 	    if (Input.GetKeyDown(Echolocate))
 	    {
@@ -72,7 +84,6 @@ public class Bat : MonoBehaviour {
             EcholocatorFuel -= EcholocatorFuelRequired;
             _echolocatorTimer = EcholocatorTimeout;
 
-            GameManager.Instance.MoveSpider();
             GameManager.Instance.ProcessFlies();
         }
     }
