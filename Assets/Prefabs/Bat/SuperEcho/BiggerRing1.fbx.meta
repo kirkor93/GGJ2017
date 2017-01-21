@@ -1,17 +1,21 @@
 fileFormatVersion: 2
-guid: 516f110f04d30a141abc0edb259c369b
-timeCreated: 1484997414
+guid: 2b537ae2db7ecfa48bbb3bacee544f61
+timeCreated: 1485007485
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
   fileIDToRecycleName:
     100000: //RootNode
+    100002: Camera
+    100004: Circle
+    100006: Lamp
     400000: //RootNode
-    2300000: //RootNode
-    3300000: //RootNode
+    400002: Camera
+    400004: Circle
+    400006: Lamp
+    2300000: Circle
+    3300000: Circle
     4300000: Circle
-    7400000: Default Take
-    9500000: //RootNode
   materials:
     importMaterials: 1
     materialName: 0
@@ -74,7 +78,7 @@ ModelImporter:
     hasExtraRoot: 0
     skeletonHasParents: 1
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 2
+  animationType: 0
   humanoidOversampling: 1
   additionalBone: 0
   userData: 
