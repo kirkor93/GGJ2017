@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Spider : MonoBehaviour
 {
+	public ParticleSystem deathParticle;
     [Header("Movement")]
     [Range(0, 10)]
     public int InitialMovementPerEcho;
@@ -110,9 +111,11 @@ public class Spider : MonoBehaviour
         {
             Debug.Log(string.Format("Spider triggered with {0}. Nothing to do here", other.gameObject.name));
             return;
-        }
+        } 
 
         GameManager.Instance.StopGame(false);
+		GameObject deathPartClone = (GameObject)Instantiate (deathParticle.gameObject, transform.position + Vector3.back, Quaternion.identity);
+		print ("boom");
     }
 
     private void Update()

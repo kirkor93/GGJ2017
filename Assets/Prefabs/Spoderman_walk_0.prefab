@@ -23,6 +23,7 @@ GameObject:
   - component: {fileID: 23478573199965230}
   - component: {fileID: 33529831957349314}
   - component: {fileID: 114619706603792268}
+  - component: {fileID: 70562313547940100}
   m_Layer: 0
   m_Name: Spoderman_walk_0
   m_TagString: Untagged
@@ -37,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423623670777864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.95, y: 2.07, z: -0.309}
+  m_LocalPosition: {x: 1.9920709, y: -1.4, z: -0.309}
   m_LocalScale: {x: 1.9604868, y: 1.9604868, z: 1.9604868}
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,6 +82,20 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423623670777864}
   m_Mesh: {fileID: 10210, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!70 &70562313547940100
+CapsuleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1423623670777864}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.03, y: -0.09}
+  m_Size: {x: 0.3, y: 0.52}
+  m_Direction: 0
 --- !u!114 &114347251396504388
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,6 +107,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af9e08e9c81fbb4182d2f4522b5d9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  deathParticle: {fileID: 198056464048749686, guid: c563b27fec2093a40b63a132a8beaedb,
+    type: 2}
   InitialMovementPerEcho: 1
   EchosToImproveMovement: 3
   MovementImproveValue: 1

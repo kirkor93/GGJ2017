@@ -1,10 +1,12 @@
 fileFormatVersion: 2
 guid: 7f445bcff0d5dd44b8ec151ee3f4e39e
-timeCreated: 1484962488
+timeCreated: 1485077383
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - radevousParticle: {fileID: 1398285018586286, guid: 119f06141eeca0a4eb234614b69f9e82,
+      type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
