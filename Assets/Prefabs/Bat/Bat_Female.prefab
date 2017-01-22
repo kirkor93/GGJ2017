@@ -41,7 +41,6 @@ GameObject:
   - component: {fileID: 50654391975942112}
   - component: {fileID: 58563969131937524}
   - component: {fileID: 114238953426643958}
-  - component: {fileID: 114676632690316942}
   - component: {fileID: 114006414293093854}
   m_Layer: 0
   m_Name: Bat_Female
@@ -273,18 +272,6 @@ MonoBehaviour:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1289370063073324}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f445bcff0d5dd44b8ec151ee3f4e39e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radevousParticle: {fileID: 0}
---- !u!114 &114676632690316942
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1468520959872584}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7f445bcff0d5dd44b8ec151ee3f4e39e, type: 3}

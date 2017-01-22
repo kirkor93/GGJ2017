@@ -24,7 +24,6 @@ GameObject:
   - component: {fileID: 50233574692206644}
   - component: {fileID: 58042491400019096}
   - component: {fileID: 114264243278435868}
-  - component: {fileID: 114227816028843370}
   - component: {fileID: 114334556737130432}
   m_Layer: 0
   m_Name: Bat_Male
@@ -227,18 +226,6 @@ Light:
   m_BounceIntensity: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!114 &114227816028843370
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1037478813036110}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7f445bcff0d5dd44b8ec151ee3f4e39e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  radevousParticle: {fileID: 0}
 --- !u!114 &114264243278435868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -290,4 +277,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7f445bcff0d5dd44b8ec151ee3f4e39e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radevousParticle: {fileID: 0}
+  radevousParticle: {fileID: 1398285018586286, guid: 119f06141eeca0a4eb234614b69f9e82,
+    type: 2}
