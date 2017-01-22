@@ -12,13 +12,13 @@ public class MainMenuController : MonoBehaviour
     public Transform SecondLogoTarget;
     public Image[] MenuButtons;
     public GameObject[] Shrooms;
-	private AudioSource theme;
+	// AudioSource theme;
 
     private void Awake()
     {
         FirstLogo.DOFade(0.0f, 2.0f).OnComplete(OnFirstLogoFadeComplete).SetDelay(1.5f);
-		theme = GetComponent<AudioSource> ();
-		theme.playOnAwake = true;
+		//theme = GetComponent<AudioSource> ();
+		//theme.playOnAwake = true;
 
     }
 
