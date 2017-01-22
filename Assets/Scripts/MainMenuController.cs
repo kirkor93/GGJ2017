@@ -15,6 +15,7 @@ public class MainMenuController : MonoBehaviour
     public GameObject[] Shrooms;
     public Image LeftImage;
     public Image Credits;
+    public Image OverrideBackground;
 
     public Image HintScreen1;
     public Image HintScreen2;
@@ -33,6 +34,7 @@ public class MainMenuController : MonoBehaviour
     {
         Sequence s = DOTween.Sequence();
         s.Append(SecondLogo.DOFade(1.0f, 1.5f));
+        s.Append(OverrideBackground.DOFade(1.0f, 0.1f).SetDelay(2.0f));
         s.Append(SecondLogo.DOFade(0.0f, 1.5f).SetDelay(1.0f));
 
         s.OnComplete(OnSecondLogoFadeComplete);
