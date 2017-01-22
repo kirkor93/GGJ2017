@@ -12,6 +12,8 @@ public class MainMenuController : MonoBehaviour
     public Transform SecondLogoTarget;
     public Image[] MenuButtons;
     public GameObject[] Shrooms;
+    public Image LeftImage;
+    public Image Credits;
 	// AudioSource theme;
 
     private void Awake()
@@ -37,6 +39,7 @@ public class MainMenuController : MonoBehaviour
     private void ShowButtons()
     {
         MenuButtons[0].DOFade(1.0f, 0.6f).OnComplete(() => MenuButtons[1].DOFade(1.0f, 0.6f).OnComplete(() => MenuButtons[2].DOFade(1.0f, 0.6f).OnComplete(ShowShrooms)));
+        LeftImage.DOFade(1.0f, 1.5f);
     }
 
     private void ShowShrooms()
@@ -55,12 +58,24 @@ public class MainMenuController : MonoBehaviour
 
     public void StartButton()
     {
-        SceneManager.LoadScene("Level1");
+        string[] levels = new[] {"Level1", "Level2"};
+
+        
+        SceneManager.LoadScene(levels[Random.Range(0, levels.Length)]);
     }
 
     public void CreditsButton()
     {
+        Image faded = Credits;
+        Image shown = LeftImage;
+        if (LeftImage.material.color.a > 0.5f)
+        {
+            faded = LeftImage;
+            shown = Credits;
+        }
 
+        faded.DOFade(0.0f, 1.0f);
+        shown.DOFade(1.0f, 1.0f).SetDelay(1.0f);
     }
 
     public void ExitButton()
