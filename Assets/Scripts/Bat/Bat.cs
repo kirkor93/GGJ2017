@@ -19,8 +19,15 @@ public class Bat : MonoBehaviour {
     public float EcholocatorTimeout;
 
     private float _echolocatorTimer;
+    private bool _steeringInverted = false;
 
-	// Use this for initialization
+    public bool SteeringInverted
+    {
+        get { return _steeringInverted; }
+        set { _steeringInverted = value; }
+    }
+
+    // Use this for initialization
 	void Start () {
 
 	}
@@ -51,6 +58,11 @@ public class Bat : MonoBehaviour {
         {
             changePos.x -= Time.deltaTime * speed;
         }
+
+	    if (SteeringInverted)
+	    {
+	        changePos *= -1.0f;
+	    }
 
 	    Vector3 oldPos = transform.position;
         transform.position += changePos;
