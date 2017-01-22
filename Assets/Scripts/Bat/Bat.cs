@@ -6,6 +6,9 @@ public class Bat : MonoBehaviour {
 
 	public float speed;
 
+	private AudioSource audioSource;
+	public AudioClip[] chrip;
+
 	//Movement direction variables
 	public KeyCode up;
 	public KeyCode down;
@@ -29,7 +32,7 @@ public class Bat : MonoBehaviour {
 
     // Use this for initialization
 	void Start () {
-
+		audioSource = GetComponent<AudioSource> ();
 	}
 
 	// Update is called once per frame
@@ -102,6 +105,8 @@ public class Bat : MonoBehaviour {
             _echolocatorTimer = EcholocatorTimeout;
 
             GameManager.Instance.ProcessFlies();
+			audioSource.clip = chrip[Random.Range(0,chrip.Length)];
+			audioSource.Play ();
         }
     }
 }
