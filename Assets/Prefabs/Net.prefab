@@ -106,6 +106,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684092b4c2d4e90499c3260cecb39313, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SpeedDecreaseValue: 1.57
+  SpeedDecreaseValue: 0.57
   SpeedDecreaseTime: 6.4
   IsDestroyedOnTrigger: 1
