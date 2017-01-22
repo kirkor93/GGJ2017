@@ -1,6 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 [RequireComponent(typeof(WaypointsManager))]
 public class GameManager : Singleton<GameManager>
@@ -18,6 +21,12 @@ public class GameManager : Singleton<GameManager>
     [Range(0, 30)]
     private int _fliesSpawnedPerEcho;
 
+    [SerializeField]
+    private float _flipTime = 20.0f;
+    [SerializeField]
+    private Camera _flippedCamera;
+   
+
     private float _timer;
 
     private bool _initialized;
@@ -26,6 +35,7 @@ public class GameManager : Singleton<GameManager>
     private WaypointsManager _waypointsManager;
 
     private List<Fly> _spawnedFlies = new List<Fly>();
+    private Coroutine _camerasCoroutine;
 
     public bool IsGameRunning
     {
@@ -76,6 +86,13 @@ public class GameManager : Singleton<GameManager>
             _spiders[i].Reset();
         }
 
+        foreach (Bat player in Players)
+        {
+            player.SteeringInverted = false;
+        }
+
+        _camerasCoroutine = StartCoroutine(CamerasCoroutine());
+
         _gameRunning = true;
     }
 
@@ -87,6 +104,12 @@ public class GameManager : Singleton<GameManager>
 
     public void StopGame(bool isWon)
     {
+        if (_camerasCoroutine != null)
+        {
+            StopCoroutine(_camerasCoroutine);
+        }
+
+        _flippedCamera.transform.eulerAngles = Vector3.zero;
 
         _gameRunning = false;
     }
@@ -136,6 +159,20 @@ public class GameManager : Singleton<GameManager>
                 GameObject fly = Instantiate(_fliesPrefabs[Random.Range(0, _fliesPrefabs.Length)].gameObject,
                     new Vector3(selected.transform.position.x, selected.transform.position.y, -0.01f), Quaternion.identity);
                 _spawnedFlies.Add(fly.GetComponent<Fly>());
+            }
+        }
+    }
+
+    private IEnumerator CamerasCoroutine()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(_flipTime);
+
+            _flippedCamera.transform.DORotate(_flippedCamera.transform.eulerAngles + Vector3.forward * 180, 1.5f);
+            foreach (Bat player in _players)
+            {
+                player.SteeringInverted = !player.SteeringInverted;
             }
         }
     }
