@@ -109,7 +109,8 @@ public class GameManager : Singleton<GameManager>
             StopCoroutine(_camerasCoroutine);
         }
 
-        _flippedCamera.transform.eulerAngles = Vector3.zero;
+        UI.Instance.ShowEndgameScreen(isWon);
+//        _flippedCamera.transform.eulerAngles = Vector3.zero;
 
         _gameRunning = false;
     }

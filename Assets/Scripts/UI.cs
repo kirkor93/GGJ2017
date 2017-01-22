@@ -1,15 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class UI : MonoBehaviour {
+public class UI : Singleton<UI> {
 
 	public Text timer;
     public Image[] PlayerBars;
 
-
+    public Image WonScreen;
+    public Image LostScreen;
 	// Use this for initialization
 	void Start () {
 		
@@ -25,6 +27,12 @@ public class UI : MonoBehaviour {
 	        PlayerBars[i].fillAmount = Mathf.Clamp01(bat.EcholocatorFuel / bat.EcholocatorFuelRequired);
 	    }
 	}
+
+    public void ShowEndgameScreen(bool won)
+    {
+        Image selectedScreen = won ? WonScreen : LostScreen;
+        selectedScreen.DOFade(1.0f, 2.0f).SetDelay(1.0f);
+    }
 
     public void RestartButton()
     {

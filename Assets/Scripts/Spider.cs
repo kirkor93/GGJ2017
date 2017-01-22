@@ -120,6 +120,11 @@ public class Spider : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGameRunning)
+        {
+            return;
+        }
+
         Vector2 direction = ((Vector2) _currentWaypoint.transform.position - (Vector2) transform.position);
         Vector2 normalizedDirection = direction.normalized;
         normalizedDirection *= Time.deltaTime * MovementSpeed;

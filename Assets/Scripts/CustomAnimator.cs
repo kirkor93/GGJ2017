@@ -22,6 +22,11 @@ public class CustomAnimator : MonoBehaviour
 
     private void Update()
     {
+        if (!GameManager.Instance.IsGameRunning)
+        {
+            return;
+        }
+
         _timer += Time.deltaTime;
 
         if (_timer >= _changeTime)
