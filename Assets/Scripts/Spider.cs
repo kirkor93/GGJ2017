@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class Spider : MonoBehaviour
 {
+
+	private AudioSource audioSource;
+	public GameObject batMale;
+	public GameObject batFemale;
+	public float distanceSounds = 3.0f;
+	
 	public ParticleSystem deathParticle;
     [Header("Movement")]
     [Range(0, 10)]
@@ -33,6 +39,10 @@ public class Spider : MonoBehaviour
     private bool _initialized;
     private int _currentMovement;
     private int _moveIterations;
+
+	void Start(){
+		audioSource = GetComponent<AudioSource> ();
+	}
 
     public void Initialize()
     {
@@ -120,6 +130,8 @@ public class Spider : MonoBehaviour
 
     private void Update()
     {
+		WalkingSound ();
+
         if (!GameManager.Instance.IsGameRunning)
         {
             return;
@@ -140,4 +152,16 @@ public class Spider : MonoBehaviour
             Move(GameManager.Instance.PlayersTransforms);
         }
     }
+
+	void WalkingSound(){
+
+		if (distanceSounds > Vector3.Distance (transform.position, batFemale.transform.position)) {
+			audioSource.mute = false;
+		} else if (distanceSounds > Vector3.Distance (transform.position, batMale.transform.position)) {
+			audioSource.mute = false;
+		} else {
+			audioSource.mute = true;
+
+		}			
+	}
 }

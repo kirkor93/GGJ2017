@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class ScreenShaker : Singleton<ScreenShaker>
 {
+	private AudioSource audioSource;
+
     [SerializeField]
     private Camera[] _affectedCameras;
 
@@ -13,12 +15,16 @@ public class ScreenShaker : Singleton<ScreenShaker>
     private const float DefaultShakePower = 8.0f;
     private const float DefaultShakeTime = 2.0f;
 
+	void Start(){
+		audioSource = GetComponent<AudioSource> ();
+	}
+
     public void Shake(float power = DefaultShakePower, float time = DefaultShakeTime)
     {
-        if (!_isShaking)
-        {
-            StartCoroutine(ShakeCoroutine(power, time));
-        }
+		if (!_isShaking) {
+			StartCoroutine (ShakeCoroutine (power, time));
+			audioSource.Play ();
+		} 
     }
 
     private IEnumerator ShakeCoroutine(float power, float time)

@@ -8,3 +8,7 @@ obj/
 *.userprefs
 Build/
 Assets/Marcek - smietnik.meta
+Assets/Sounds/Music/intro_music.wav
+Assets/Sounds/Music/intro_music.wav.meta
+Assets/Sounds/Music/level_loop_music.wav
+Assets/Sounds/Music/level_loop_music.wav.meta
