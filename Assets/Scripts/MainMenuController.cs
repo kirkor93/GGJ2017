@@ -9,11 +9,16 @@ public class MainMenuController : MonoBehaviour
 {
     public Image FirstLogo;
     public Image SecondLogo;
+    public Image ThirdLogo;
     public Transform SecondLogoTarget;
     public Image[] MenuButtons;
     public GameObject[] Shrooms;
     public Image LeftImage;
     public Image Credits;
+
+    public Image HintScreen1;
+    public Image HintScreen2;
+    public Image HintBg;
 	// AudioSource theme;
 
     private void Awake()
@@ -26,14 +31,23 @@ public class MainMenuController : MonoBehaviour
 
     private void OnFirstLogoFadeComplete()
     {
-        SecondLogo.DOFade(1.0f, 1.5f).OnComplete(OnSecondLogoFadeComplete);
+        Sequence s = DOTween.Sequence();
+        s.Append(SecondLogo.DOFade(1.0f, 1.5f));
+        s.Append(SecondLogo.DOFade(0.0f, 1.5f).SetDelay(1.0f));
+
+        s.OnComplete(OnSecondLogoFadeComplete);
     }
 
+    
     private void OnSecondLogoFadeComplete()
     {
-        SecondLogo.transform.DOScale(Vector3.one * 0.55f, 2.0f)
-            .OnStart(() => SecondLogo.transform.DOMove(SecondLogoTarget.position, 2.0f)).OnComplete(ShowButtons);
+        ThirdLogo.DOFade(1.0f, 1.5f).OnComplete(OnThirdLogoFadeComplete);
+    }
 
+    private void OnThirdLogoFadeComplete()
+    {
+        ThirdLogo.transform.DOScale(Vector3.one * 0.55f, 2.0f)
+            .OnStart(() => ThirdLogo.transform.DOMove(SecondLogoTarget.position, 2.0f)).OnComplete(ShowButtons);
     }
 
     private void ShowButtons()
@@ -44,6 +58,12 @@ public class MainMenuController : MonoBehaviour
 
     private void ShowShrooms()
     {
+        ShowShrooms(true);
+    }
+
+    private void ShowShrooms(bool show)
+    {
+        float value = show ? 1.0f : 0.0f;
         foreach (GameObject pair in Shrooms)
         {
             Image[] images = pair.GetComponentsInChildren<Image>(true);
@@ -51,17 +71,26 @@ public class MainMenuController : MonoBehaviour
             foreach (Image image in images)
             {
                 float spawnTime = Random.Range(0.2f, 0.8f);
-                image.DOFade(1.0f, spawnTime).SetDelay(delay);
+                image.DOFade(value, spawnTime).SetDelay(delay);
             }
         }
     }
 
     public void StartButton()
     {
-        string[] levels = new[] {"Level1", "Level2"};
+        ShowShrooms(false);
+        foreach (Image button in MenuButtons)
+        {
+            button.DOFade(0.0f, 1.0f);
+        }
+        LeftImage.DOFade(0.0f, 1.0f);
+        Credits.DOFade(0.0f, 1.0f);
+        ThirdLogo.DOFade(0.0f, 1.0f);
 
-        
-        SceneManager.LoadScene(levels[Random.Range(0, levels.Length)]);
+        HintBg.gameObject.SetActive(true);
+        HintBg.DOFade(1.0f, 1.0f);
+        HintScreen1.gameObject.SetActive(true);
+        HintScreen1.DOFade(1.0f, 1.0f).SetDelay(1.0f);
     }
 
     public void CreditsButton()
@@ -81,5 +110,25 @@ public class MainMenuController : MonoBehaviour
     public void ExitButton()
     {
         Application.Quit();
+    }
+
+    public void HintButton(int hintNum)
+    {
+        switch (hintNum)
+        {
+            case 1:
+                HintScreen1.DOFade(0.0f, 1.0f).OnComplete(() =>
+                {
+                    HintScreen1.gameObject.SetActive(false);
+                HintScreen2.gameObject.SetActive(true);
+        });
+        HintScreen2.DOFade(1.0f, 1.0f).SetDelay(1.0f);
+                break;
+            case 2:
+            default:
+                string[] levels = new[] { "Level1", "Level2" };
+                SceneManager.LoadScene(levels[Random.Range(0, levels.Length)]);
+                break;
+        }
     }
 }
