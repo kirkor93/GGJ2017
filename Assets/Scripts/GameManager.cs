@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     private Fly[] _fliesPrefabs;
 
     [SerializeField]
-    [Range(0, 10)]
+    [Range(0, 30)]
     private int _fliesSpawnedPerEcho;
 
     private float _timer;

@@ -127,6 +127,12 @@ public class Fly : MonoBehaviour
 
     private IEnumerator SpeedCoroutine(Bat bat, float value)
     {
+        float targetValue = bat.speed + value;
+        if (targetValue < 0)
+        {
+            value -= targetValue;
+        }
+
         bat.speed += value;
         yield return new WaitForSeconds(_duration);
         bat.speed -= value;

@@ -5,8 +5,8 @@ using UnityEngine;
 [RequireComponent(typeof(Collider2D))]
 public class Net : MonoBehaviour
 {
-    [Range(0.0f, 1.0f)]
-    public float SpeedDecreasePercent = 0.5f;
+    [Range(0.0f, 10.0f)]
+    public float SpeedDecreaseValue = 0.5f;
     [Range(0.0f, 20.0f)]
     public float SpeedDecreaseTime = 3.0f;
 
@@ -33,14 +33,20 @@ public class Net : MonoBehaviour
 
     private IEnumerator SlowDownCoroutine(Bat bat)
     {
-        bat.speed *= 1.0f - SpeedDecreasePercent;
+        float value = SpeedDecreaseValue;
+        float targetValue = bat.speed - value;
+        if (targetValue < 0)
+        {
+            value += targetValue;
+        }
+        bat.speed -= value;
         float timer = 0.0f;
         while (timer < SpeedDecreaseTime)
         {
             yield return null;
             timer += Time.deltaTime;
         }
-        bat.speed /= 1.0f - SpeedDecreasePercent;
+        bat.speed += value;
         if (IsDestroyedOnTrigger)
         {
             Destroy(gameObject);

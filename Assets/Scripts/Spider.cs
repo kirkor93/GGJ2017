@@ -22,6 +22,10 @@ public class Spider : MonoBehaviour
     [SerializeField]
     private Net _netPrefab;
 
+    [SerializeField]
+    [Range(0.0f, 1.0f)]
+    private float _spawnChance = 0.4f;
+
     private List<Net> _spawnedNets = new List<Net>();
     
 
@@ -85,8 +89,12 @@ public class Spider : MonoBehaviour
         }
         if (!alreadySpawnedNet)
         {
-            GameObject net = Instantiate(_netPrefab.gameObject, transform.position, transform.rotation);
-            _spawnedNets.Add(net.GetComponent<Net>());
+            float randomValue = Random.Range(0.0f, 1.0f);
+            if (randomValue < _spawnChance)
+            {
+                GameObject net = Instantiate(_netPrefab.gameObject, transform.position, transform.rotation);
+                _spawnedNets.Add(net.GetComponent<Net>());
+            }
         }
     }
 

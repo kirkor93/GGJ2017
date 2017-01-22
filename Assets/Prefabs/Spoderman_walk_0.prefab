@@ -96,9 +96,10 @@ MonoBehaviour:
   EchosToImproveMovement: 3
   MovementImproveValue: 1
   TileSize: 1
-  MovementSpeed: 0.5
+  MovementSpeed: 0.55
   _netPrefab: {fileID: 114140309709820946, guid: 46c6f29595629884598322458113cfb0,
     type: 2}
+  _spawnChance: 0.4
 --- !u!114 &114619706603792268
 MonoBehaviour:
   m_ObjectHideFlags: 1
