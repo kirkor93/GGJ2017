@@ -6,8 +6,8 @@ public class Spider : MonoBehaviour
 {
 
 	private AudioSource audioSource;
-	public GameObject batMale;
-	public GameObject batFemale;
+//	public GameObject batMale;
+//	public GameObject batFemale;
 	public float distanceSounds = 3.0f;
 	
 	public ParticleSystem deathParticle;
@@ -130,7 +130,7 @@ public class Spider : MonoBehaviour
 
     private void Update()
     {
-		WalkingSound ();
+//		WalkingSound ();
 
         if (!GameManager.Instance.IsGameRunning)
         {
@@ -153,15 +153,15 @@ public class Spider : MonoBehaviour
         }
     }
 
-	void WalkingSound(){
-
-		if (distanceSounds > Vector3.Distance (transform.position, batFemale.transform.position)) {
-			audioSource.mute = false;
-		} else if (distanceSounds > Vector3.Distance (transform.position, batMale.transform.position)) {
-			audioSource.mute = false;
-		} else {
-			audioSource.mute = true;
-
-		}			
-	}
+//	void WalkingSound(){
+//
+//		if (distanceSounds > Vector3.Distance (transform.position, batFemale.transform.position)) {
+//			audioSource.mute = false;
+//		} else if (distanceSounds > Vector3.Distance (transform.position, batMale.transform.position)) {
+//			audioSource.mute = false;
+//		} else {
+//			audioSource.mute = true;
+//
+//		}			
+//	}
 }

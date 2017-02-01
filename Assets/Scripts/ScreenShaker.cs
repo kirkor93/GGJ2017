@@ -23,6 +23,7 @@ public class ScreenShaker : Singleton<ScreenShaker>
     {
 		if (!_isShaking) {
 			StartCoroutine (ShakeCoroutine (power, time));
+
 			audioSource.Play ();
 		} 
     }

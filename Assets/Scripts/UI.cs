@@ -26,7 +26,25 @@ public class UI : Singleton<UI> {
 	        Bat bat = GameManager.Instance.Players[i];
 	        PlayerBars[i].fillAmount = Mathf.Clamp01(bat.EcholocatorFuel / bat.EcholocatorFuelRequired);
 	    }
-	}
+
+	    if (Input.GetKeyDown(KeyCode.R))
+	    {
+            RestartButton();
+	    }
+	    else if(Input.GetKeyDown(KeyCode.Alpha1))
+	    {
+	        MainMenuButton();
+	    }
+        else if (Input.GetKeyDown(KeyCode.Alpha2))
+	    {
+            SceneManager.LoadScene("Level1");
+        }
+	    else if (Input.GetKeyDown(KeyCode.Alpha3))
+	    {
+            SceneManager.LoadScene("Level2");
+        }
+
+    }
 
     public void ShowEndgameScreen(bool won)
     {

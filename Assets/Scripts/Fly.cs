@@ -27,6 +27,8 @@ public class Fly : MonoBehaviour
     [SerializeField]
     private float _duration;
 
+    public AudioClip[] EatSounds;
+
     private bool _initialized = false;
     private Collider2D _collider;
     private Renderer _renderer;
@@ -123,6 +125,10 @@ public class Fly : MonoBehaviour
         _collider.enabled = false;
         _renderer.enabled = false;
         bat.EcholocatorFuel += _echoEnergyBoost;
+
+        AudioSource s = GetComponent<AudioSource>();
+        s.clip = EatSounds[Random.Range(0, EatSounds.Length)];
+        s.Play();
     }
 
     private IEnumerator SpeedCoroutine(Bat bat, float value)

@@ -25,7 +25,9 @@ public class GameManager : Singleton<GameManager>
     private float _flipTime = 20.0f;
     [SerializeField]
     private Camera _flippedCamera;
-   
+
+    public AudioClip[] WinSounds;
+    public AudioClip[] LoseSounds;
 
     private float _timer;
 
@@ -36,6 +38,9 @@ public class GameManager : Singleton<GameManager>
 
     private List<Fly> _spawnedFlies = new List<Fly>();
     private Coroutine _camerasCoroutine;
+
+    private float _defaultCameraSize;
+    private const float DefaultRatio = 16.0f / 9.0f;
 
     public bool IsGameRunning
     {
@@ -64,6 +69,10 @@ public class GameManager : Singleton<GameManager>
             return;
         }
 
+        if (Mathf.Abs(_flippedCamera.aspect - DefaultRatio) > float.Epsilon)
+        {
+            _flippedCamera.orthographicSize *= DefaultRatio / _flippedCamera.aspect;
+        }
         _waypointsManager = GetComponent<WaypointsManager>();
         _playersTransforms = new Transform[_players.Length];
         for (int i = 0; i < _players.Length; i++)
@@ -110,6 +119,12 @@ public class GameManager : Singleton<GameManager>
         }
 
         UI.Instance.ShowEndgameScreen(isWon);
+
+        AudioClip[] selectedSet = isWon ? WinSounds : LoseSounds;
+        UnityEngine.AudioSource s = GetComponent<AudioSource>();
+        s.clip = selectedSet[UnityEngine.Random.Range(0, selectedSet.Length)];
+        s.Play();
+
 //        _flippedCamera.transform.eulerAngles = Vector3.zero;
 
         _gameRunning = false;

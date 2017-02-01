@@ -48,7 +48,7 @@ public class MainMenuController : MonoBehaviour
 
     private void OnThirdLogoFadeComplete()
     {
-        ThirdLogo.transform.DOScale(Vector3.one * 0.55f, 2.0f)
+        ThirdLogo.transform.DOScale(Vector3.one * 0.8f, 2.0f)
             .OnStart(() => ThirdLogo.transform.DOMove(SecondLogoTarget.position, 2.0f)).OnComplete(ShowButtons);
     }
 
