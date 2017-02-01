@@ -1,30 +1,64 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class MusicManager : MonoBehaviour {
+public class MusicManager : MonoBehaviour
+{
 
-	private AudioSource audiosource;
-	public AudioClip intro;
-	public AudioClip loop;
+	private AudioSource _audioSource;
 
-	// Use this for initialization
-	void Start () {
-		audiosource = GetComponent<AudioSource> ();
-		audiosource.clip = intro;
-		audiosource.Play ();
+    public AudioClip MenuTheme;
+    public AudioClip LevelThemeIntro;
+    public AudioClip LevelThemeLoop;
+    
+	private void Start ()
+    {
+        DontDestroyOnLoad(gameObject);
+
+		_audioSource = GetComponent<AudioSource> ();
+        _audioSource.loop = false;
+        _audioSource.clip = MenuTheme;
+        _audioSource.Play();
+
+        SceneManager.sceneLoaded += OnSceneLoad;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-		PlayMusic ();
-	}
 
-	void PlayMusic(){
-		if (!audiosource.isPlaying) {
-			audiosource.clip = loop;
-			audiosource.Play ();
-			audiosource.loop = true;
-		}
-	}
+    private void Update ()
+    {
+        if (!_audioSource.isPlaying)
+        {
+            if (_audioSource.clip == LevelThemeIntro)
+            {
+                _audioSource.clip = LevelThemeLoop;
+            }
+
+            _audioSource.Play();
+        }
+    }
+
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoad;
+    }
+
+    private void OnSceneLoad(Scene scene, LoadSceneMode loadSceneMode)
+    {
+        if (scene.name == "MainMenu")
+        {
+            StartClip(MenuTheme);
+        }
+        else if(_audioSource.clip == MenuTheme)
+        {
+            StartClip(LevelThemeIntro);
+        }
+    }
+
+    private void StartClip(AudioClip clip)
+    {
+        _audioSource.Stop();
+        _audioSource.clip = clip;
+        _audioSource.Play();
+    }
 }
