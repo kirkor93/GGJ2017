@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1423623670777864}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.9920709, y: -1.4, z: -0.309}
+  m_LocalPosition: {x: -4.156678, y: -2.826083, z: -0.309}
   m_LocalScale: {x: 1.9604868, y: 1.9604868, z: 1.9604868}
   m_Children: []
   m_Father: {fileID: 0}
@@ -107,6 +107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1af9e08e9c81fbb4182d2f4522b5d9c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  distanceSounds: 3
   deathParticle: {fileID: 198056464048749686, guid: c563b27fec2093a40b63a132a8beaedb,
     type: 2}
   InitialMovementPerEcho: 1
